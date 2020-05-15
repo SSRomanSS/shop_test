@@ -1,28 +1,35 @@
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render
-
-# Функция для установки сессионного ключа.
-# По нему django будет определять, выполнил ли вход пользователь.
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
+from .forms import OrderForm
+
 
 class LoginFormView(FormView):
     form_class = AuthenticationForm
-
-    # Аналогично регистрации, только используем шаблон аутентификации.
     template_name = "login.html"
-
-    # В случае успеха перенаправим на главную.
     success_url = "/menu"
 
     def form_valid(self, form):
-        # Получаем объект пользователя на основе введённых в форму данных.
         self.user = form.get_user()
-
-        # Выполняем аутентификацию пользователя.
         login(self.request, self.user)
         return super(LoginFormView, self).form_valid(form)
 
-
+@login_required(login_url='/')
 def menu_view(request):
     return render(request, 'menu.html', {})
+
+@login_required(login_url='/')
+def order_new(request):
+    if request.method == "POST":
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.user = request.user
+            #order.save()
+            return redirect('menu')
+    else:
+        form = OrderForm()
+    return render(request, 'cart.html', {'form': form})
