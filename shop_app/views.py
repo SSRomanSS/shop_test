@@ -24,10 +24,12 @@ class LoginFormView(FormView):
         login(self.request, self.user)
         return super(LoginFormView, self).form_valid(form)
 
+
 @login_required(login_url='/')
 def menu_view(request):
     """View for menu page"""
     return render(request, 'menu.html', {})
+
 
 @login_required(login_url='/')
 def order_new(request):
@@ -42,6 +44,7 @@ def order_new(request):
     else:
         form = OrderForm()
     return render(request, 'cart.html', {'form': form})
+
 
 @login_required(login_url='/')
 def statistics_view(request):
