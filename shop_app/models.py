@@ -3,13 +3,15 @@ from django.core.exceptions import ValidationError
 
 
 def validate_name(value):
-   if len(value) < 3:
-      raise ValidationError(f'Name "{value}" has less then 3 symbols')
+    """Validator for name length"""
+    if len(value) < 2:
+        raise ValidationError(f'Name "{value}" has less then 2 symbols')
 
 
 def validate_price(value):
-   if value <= 0:
-      raise ValidationError('Price must be positive')
+    """Validator for price"""
+    if value <= 0:
+        raise ValidationError('Price must be positive')
 
 
 class Order(models.Model):

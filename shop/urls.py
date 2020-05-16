@@ -15,8 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
-from django.contrib.auth.decorators import login_required
-
 from shop_app import views
 
 
@@ -25,4 +23,5 @@ urlpatterns = [
     re_path(r'^$', views.LoginFormView.as_view()),
     re_path(r'^menu/$', views.menu_view, name='menu'),
     re_path(r'^cart/$', views.order_new, name='order_new'),
+    re_path(r'^statistics/$', views.statistics_view, name='statistics'),
 ]

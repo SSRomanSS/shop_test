@@ -1,4 +1,44 @@
 {% extends "base.html" %}
 {% block content %}
+<h3>Statistics</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Query</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+	  <td>users products</td>
+	  <td>{{ data.users_products }}</td>
+	</tr>
+    <tr>
+	  <td>all products</td>
+	  <td>{{ data.all_products }}</td>
+	</tr>
+    <tr>
+	  <td>users max price</td>
+	  <td>{{ data.users_max_price }}</td>
+	</tr>
+    <tr>
+	  <td>avg all price</td>
+	  <td>{{ data.avg_all_price }}</td>
+	</tr>
+    <tr>
+	  <td>sum users price</td>
+	  <td>{{ data.sum_users_price }}</td>
+	</tr>
+    <tr>
+	  <td>complex query</td>
+	  <td>{{ data.complex_query }}</td>
+	</tr>
 
+  </tbody>
+</table>
+<p></p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">All prices +1</button>
+</form>
 {% endblock content %}
