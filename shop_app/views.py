@@ -52,13 +52,13 @@ def statistics_view(request):
     user = str(request.user)  # get name of an authorized user for queries to DB
     data = Order.objects
     data_dict = {}
-    data_dict['users_products'] = data.filter(user=user).count()
-    data_dict['all_products'] = data.all().count()
-    data_dict['users_max_price'] = max([query.price for query in data.filter(user=user)])
-    data_dict['avg_all_price'] = round(mean([query.price for query in data.all()]))
+    data_dict['users products'] = data.filter(user=user).count()
+    data_dict['all products'] = data.all().count()
+    data_dict['users max price'] = max([query.price for query in data.filter(user=user)])
+    data_dict['avg all prices'] = round(mean([query.price for query in data.all()]))
     CharField.register_lookup(Length)  # register lookup
-    data_dict['sum_users_price'] = sum([query.price for query in data.filter(user=user)])
-    data_dict['complex_query'] = sum([data.filter(price__gt=50).count(),
+    data_dict['sum users prices'] = sum([query.price for query in data.filter(user=user)])
+    data_dict['complex query'] = sum([data.filter(price__gt=50).count(),
                                       data.filter(user=user).filter(name__length__gt=3).count()])
     if request.method == "POST":
         Order.objects.all().update(price=F('price') + 1)

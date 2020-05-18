@@ -9,31 +9,12 @@
     </tr>
   </thead>
   <tbody>
+  {% for key, value in data.items %}
     <tr>
-	  <td>users products</td>
-	  <td>{{ data.users_products }}</td>
+	  <td>{{ key }}</td>
+	  <td>{{ value }}</td>
 	</tr>
-    <tr>
-	  <td>all products</td>
-	  <td>{{ data.all_products }}</td>
-	</tr>
-    <tr>
-	  <td>users max price</td>
-	  <td>{{ data.users_max_price }}</td>
-	</tr>
-    <tr>
-	  <td>avg all price</td>
-	  <td>{{ data.avg_all_price }}</td>
-	</tr>
-    <tr>
-	  <td>sum users price</td>
-	  <td>{{ data.sum_users_price }}</td>
-	</tr>
-    <tr>
-	  <td>complex query</td>
-	  <td>{{ data.complex_query }}</td>
-	</tr>
-
+  {% endfor %}
   </tbody>
 </table>
 <p></p>
